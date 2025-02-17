@@ -38,7 +38,7 @@ public class TransactionController {
      * @return a list of transactions
      */
     @GetMapping("/statement/{userId}")
-    public List<Transaction> getTransactionStatement(@PathVariable Long userId) {
+    public List<Transaction> getTransactionStatement(@Valid @PathVariable Long userId) {
         return transactionService.getTransactionStatement(userId);
     }
 }

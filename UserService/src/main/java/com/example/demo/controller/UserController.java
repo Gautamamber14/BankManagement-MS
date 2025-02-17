@@ -32,7 +32,7 @@ public class UserController {
      * @throws UserNotFoundException if the user is not found or credentials are invalid.
      */
     @PostMapping("/login") // Endpoint: http://localhost:8081/users/login
-    public ResponseEntity<String> loginUser(@RequestBody LoginDto loginDTO) {
+    public ResponseEntity<String> loginUser(@Valid @RequestBody LoginDto loginDTO) {
         try {
             userService.validateUser(loginDTO);
             return new ResponseEntity<>("Login successful, redirecting to menu page...", HttpStatus.OK);
@@ -63,7 +63,7 @@ public class UserController {
      * @return A {@link ResponseEntity} containing the applied loan and HTTP status.
      */
     @PostMapping("/applyLoanByUserId/{userId}") // Endpoint: http://localhost:8081/users/applyLoanByUserId/{userId}
-    public ResponseEntity<LoanDto> applyLoan(@RequestBody LoanDto loan, @PathVariable Long userId) {
+    public ResponseEntity<LoanDto> applyLoan(@Valid @RequestBody LoanDto loan, @PathVariable Long userId) {
         LoanDto appliedLoan = userService.applyLoan(loan, userId);
         return new ResponseEntity<>(appliedLoan, HttpStatus.CREATED);
     }
@@ -80,6 +80,21 @@ public class UserController {
         List<LoanDto> loanList = userService.getLoansByUserId(userId);
         return new ResponseEntity<>(loanList, HttpStatus.OK);
     }
+    
+    /**
+     * Performs a transaction for a specific user.
+     * Processes a deposit or withdrawal transaction for the user.
+     *
+     * @param transaction The {@link TransactionDto} containing transaction details.
+     * @param userId      The ID of the user performing the transaction.
+     * @return A {@link ResponseEntity} containing the performed transaction and HTTP status.
+     */
+    @PostMapping("/performtransaction/{userId}") // Endpoint: http://localhost:8081/users/performtransaction/{userId}
+    public ResponseEntity<TransactionDto> performTransactionByUserId(@Valid @RequestBody TransactionDto transaction, @PathVariable Long userId) {
+        TransactionDto performTransaction = userService.performTransactionByUserId(transaction, userId);
+        return new ResponseEntity<>(performTransaction, HttpStatus.CREATED);
+    }
+    
 
     /**
      * Retrieves all transactions for a specific user.
@@ -94,17 +109,5 @@ public class UserController {
         return new ResponseEntity<>(transactionList, HttpStatus.OK);
     }
 
-    /**
-     * Performs a transaction for a specific user.
-     * Processes a deposit or withdrawal transaction for the user.
-     *
-     * @param transaction The {@link TransactionDto} containing transaction details.
-     * @param userId      The ID of the user performing the transaction.
-     * @return A {@link ResponseEntity} containing the performed transaction and HTTP status.
-     */
-    @PostMapping("/performtransaction/{userId}") // Endpoint: http://localhost:8081/users/performtransaction/{userId}
-    public ResponseEntity<TransactionDto> performTransactionByUserId(@RequestBody TransactionDto transaction, @PathVariable Long userId) {
-        TransactionDto performTransaction = userService.performTransactionByUserId(transaction, userId);
-        return new ResponseEntity<>(performTransaction, HttpStatus.CREATED);
-    }
+
 }

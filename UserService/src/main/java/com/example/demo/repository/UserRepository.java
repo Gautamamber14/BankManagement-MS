@@ -18,4 +18,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @see User
      */
     User findByUsername(String username);
+    
+    /**
+     * Checks if a username already exists in the repository.
+     *
+     * @param username The username to check for existence.
+     *                 Must not be {@code null} or empty.
+     * @return {@code true} if the username exists, {@code false} otherwise.
+     */
+    boolean existsByUsername(String username);
 }

@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Transaction;
 import com.example.demo.exception.TransactionNotFoundException;
-import com.example.demo.exception.ValidationException;
 import com.example.demo.repository.TransactionRepository;
+
+import jakarta.validation.ValidationException;
 
 /**
  * Implementation of TransactionService.
@@ -31,9 +32,8 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction performTransaction(Transaction transaction) {
         // Validate transaction data
         if (transaction.getUserId() == null ||
-            transaction.getTransactionType() == null || transaction.getTransactionType().isEmpty() ||
-            transaction.getAmount() == null || transaction.getAmount() <= 0) {
-            throw new ValidationException("Invalid transaction data");
+            transaction.getTransactionType() == null || transaction.getTransactionType().isEmpty()) {
+            throw new ValidationException("Invalid transaction data: transactionType is required");
         }
 
         // Set transaction date
@@ -42,6 +42,8 @@ public class TransactionServiceImpl implements TransactionService {
         // Save transaction
         return transactionRepository.save(transaction);
     }
+
+  
 
     /**
      * Retrieves transaction statements for a user.
