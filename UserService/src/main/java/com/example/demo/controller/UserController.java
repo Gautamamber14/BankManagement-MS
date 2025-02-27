@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/users")
@@ -84,6 +87,7 @@ public class UserController {
         List<LoanDto> loanList = userService.getLoansByUserId(userId);
         return new ResponseEntity<>(loanList, HttpStatus.OK);
     }
+    
     
     /**
      * Performs a transaction for a specific user.

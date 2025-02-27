@@ -26,6 +26,8 @@ public interface UserService {
      * @throws ValidationException if the user data fails validation checks.
      */
     User registerUser(User user);
+    
+	
 
     /**
      * Applies for a loan on behalf of the user.
@@ -66,4 +68,6 @@ public interface UserService {
      * @throws UserNotFoundByIdException if the user with the specified ID does not exist.
      */
     List<TransactionDto> getTransactionsByUserId(long userId);
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return {@code true} if the username exists, {@code false} otherwise.
      */
     boolean existsByUsername(String username);
+
+	List<User> findByUserId(Long userId);
 }

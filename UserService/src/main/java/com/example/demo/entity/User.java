@@ -29,8 +29,8 @@ public class User {
      * The username of the user.
      * Must not be empty and must be between 5 and 30 characters.
      */
-    @NotEmpty(message = "Username is required")
-    @Size(min = 5, max = 30, message = "Username must be between 5 and 30 characters")
+//   @NotEmpty(message = "Username is required")
+//    @Size(min = 5, max = 30, message = "Username must be between 5 and 30 characters")
     private String username;
 
     /**
@@ -42,7 +42,7 @@ public class User {
     private String customername;
     
     
-    private String Role;
+    
 
     /**
      * The city of the customer.
@@ -78,8 +78,8 @@ public class User {
      * The password for the user's account.
      * Must not be empty and at least 5 characters long.
      */
-    @NotEmpty(message = "Password is required")
-    @Size(min = 5, message = "Password must be at least 5 characters long")
+//    @NotEmpty(message = "Password is required")
+//    @Size(min = 5, message = "Password must be at least 5 characters long")
     private String password;
 
     /**
