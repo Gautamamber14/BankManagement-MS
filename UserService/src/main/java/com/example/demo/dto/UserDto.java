@@ -16,6 +16,8 @@ public class UserDto {
      * The username of the user.
      */
     private String username;
+    
+    private String Role;
 
     /**
      * The full name of the customer.

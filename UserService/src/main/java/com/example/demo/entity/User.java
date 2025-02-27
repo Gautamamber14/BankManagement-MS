@@ -40,6 +40,9 @@ public class User {
     @NotEmpty(message = "Customer name is required")
     @Size(min = 2, max = 30, message = "Username must be between 5 and 30 characters")
     private String customername;
+    
+    
+    private String Role;
 
     /**
      * The city of the customer.
